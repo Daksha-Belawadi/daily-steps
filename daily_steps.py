@@ -1,20 +1,9 @@
-def check_step_goal(name, steps, goal=10000):
-    """
-    Checks whether the daily step goal is met.
-    """
-    if steps >= goal:
-        return f"{name}, congratulations! You have met your daily step goal."
-    else:
-        remaining = goal - steps
-        return f"{name}, you need {remaining} more steps to reach your daily goal."
+from daily_steps import check_step_goal
 
+def test_goal_met():
+    result = check_step_goal("Alex", 12000)
+    assert "met your daily step goal" in result
 
-def main():
-    # Default values for CI/CD and Docker execution
-    name = "User"
-    steps = 7500
-    print(check_step_goal(name, steps))
-
-
-if __name__ == "__main__":
-    main()
+def test_goal_not_met():
+    result = check_step_goal("Alex", 5000)
+    assert "more steps" in result
